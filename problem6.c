@@ -35,12 +35,14 @@ int main() {
 
     if (remainingGuesses > 0) {
       if (strncmp(password, input, sizeof(password)) == 0) {
-        // Guessed the password
         flag(0);
         return 0;
       } else {
         printf("Incorrect guess. ");
       }
+
+      --remainingGuesses;
+      printf("%d guesses remaining.\n", remainingGuesses);
     } else {
       printf("You've run out of guesses! Please quit by pressing 'q': ");
       scanf("%1s", input);
@@ -48,8 +50,5 @@ int main() {
         break;
       }
     }
-
-    --remainingGuesses;
-    printf("%d guesses remaining.\n", remainingGuesses);
   } while (true);
 }

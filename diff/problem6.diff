@@ -1,0 +1,29 @@
+--- .originals/problem6.c	2026-10-14 16:35:59.157676632 +0000
++++ problem6.c	2026-10-14 18:14:32.300615477 +0000
+@@ -35,12 +35,14 @@
+ 
+     if (remainingGuesses > 0) {
+       if (strncmp(password, input, sizeof(password)) == 0) {
+-        // Guessed the password
+         flag(0);
+         return 0;
+       } else {
+         printf("Incorrect guess. ");
+       }
++
++      --remainingGuesses;
++      printf("%d guesses remaining.\n", remainingGuesses);
+     } else {
+       printf("You've run out of guesses! Please quit by pressing 'q': ");
+       scanf("%1s", input);
+@@ -48,8 +50,5 @@
+         break;
+       }
+     }
+-
+-    --remainingGuesses;
+-    printf("%d guesses remaining.\n", remainingGuesses);
+   } while (true);
+-}
++}
+\ No newline at end of file

@@ -8,6 +8,7 @@
 static const int MAX_BALANCE = 2000000000;
 
 int accountBalance = 1000;
+static pthread_mutex_t balanceMutex = PTHREAD_MUTEX_INITIALIZER;
 
 void flag() {
   printf("The flag goes here");
@@ -20,6 +21,7 @@ void *withdraw(void *arg) {
   // Ensure the user has enough money to complete this transaction
   if (amount > accountBalance) {
     printf("Insufficient funds for withdrawal of $%hu\n", amount);
+    pthread_mutex_unlock(&balanceMutex);
     return NULL;
   }
 
@@ -29,6 +31,7 @@ void *withdraw(void *arg) {
   for (unsigned short i = 0; i < amount; i++) {
     --accountBalance;
   }
+  pthread_mutex_unlock(&balanceMutex);
   return NULL;
 }
 

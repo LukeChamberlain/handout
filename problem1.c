@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 
 void flag() {
   printf("The flag goes here");
@@ -41,6 +42,14 @@ void large_withdraw(struct user_account *u) {
 
   printf("How much would you like to withdraw?\n> ");
   scanf("%u", &withdrawal);
+
+  // Reject values that would overflow a signed int or trigger
+  // integer overflow when the $50 fee is added.
+  if (withdrawal > INT_MAX - 50) {
+    printf("Sorry, that withdrawal amount is invalid.\n");
+    return;
+  }
+
   withdrawal += 50;
 
   // Ensure the user has enough money to complete the transaction

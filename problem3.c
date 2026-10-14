@@ -16,6 +16,11 @@ bool checkPassword(char *input) {
 
   // Check that the passwords match. We're using my super special comparison function that
   // shifts password characters over by 1... throws off the hackers!
+  if (strlen(input) >= sizeof(passwordBuffer)) {
+    printf("Access denied!\n");
+    return false;
+  }
+
   strcpy(passwordBuffer, input);
 
   for (size_t i = 0; i < sizeof(passwordBuffer); i++) {

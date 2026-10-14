@@ -1,0 +1,20 @@
+--- .originals/problem4.c	2026-10-14 16:35:59.156676632 +0000
++++ problem4.c	2026-10-14 18:04:24.427621764 +0000
+@@ -1,4 +1,5 @@
+ #include <stdio.h>
++#include <limits.h>
+ 
+ void flag() {
+   printf("The flag goes here");
+@@ -31,6 +32,11 @@
+     return -1;
+   }
+ 
++  if (factor != 0 && value > INT_MAX / factor) {
++    printf("Product is too large.\n");
++    return -1;
++  }
++
+   result = value * factor;
+ 
+   if (result == reset_key) {

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 
 void flag() {
   printf("The flag goes here");
@@ -28,6 +29,11 @@ int main() {
   }
   if (factor < 0) {
     printf("Invalid input. Multiple must be a positive integer!\n");
+    return -1;
+  }
+
+  if (factor != 0 && value > INT_MAX / factor) {
+    printf("Product is too large.\n");
     return -1;
   }
 
